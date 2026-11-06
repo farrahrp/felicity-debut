@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Felicity at Eighteen | An Enchanted Party</title>
 <meta name="description" content="You are invited to Felicity's debut, an enchanted party. Saturday, 12 December 2026, 5 PM at 8th Cafe and Events, Davao City. Tap to open your invitation and RSVP.">
 <meta name="theme-color" content="#2a1458">
@@ -141,6 +141,18 @@ body.behind #flies{z-index:1}
 .music-btn .bars i:nth-child(2){animation-delay:.2s}.music-btn .bars i:nth-child(3){animation-delay:.4s}.music-btn .bars i:nth-child(4){animation-delay:.1s}
 @keyframes eq{from{height:4px}to{height:18px}}
 .music-btn.off .bars{display:none}.music-btn:not(.off) .mute{display:none}
+
+/* ---------- Phones: no page zoom, lighter rendering ---------- */
+html,body{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%}
+button,a,[role=button],.gcard{touch-action:manipulation}
+@media (max-width:600px){
+  .glass,.trad,.cd div,.gal-arrow,.music-btn,.date-chip,#intro,.lb-arrow,.lb-close{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .glass{background:linear-gradient(170deg,rgba(38,14,80,.9),rgba(26,9,58,.92))!important}
+  .trad{background:linear-gradient(170deg,rgba(38,14,80,.9),rgba(26,9,58,.94))!important}
+  .cd div{background:rgba(40,16,86,.85)}
+  .gal-arrow,.music-btn{background:rgba(40,14,82,.85)}
+  .date-chip{background:rgba(70,30,130,.75)}
+}
 
 /* ---------- Hero ---------- */
 .kicker{text-shadow:0 1px 10px rgba(20,6,45,.9),0 0 2px rgba(20,6,45,.8);font-family:var(--caps);letter-spacing:.38em;font-size:12.5px;color:var(--lavender)}
@@ -683,7 +695,7 @@ form.rsvp{margin-top:28px;text-align:left;display:grid;gap:18px}
 
   /* ---------------- Sky: stars + lanterns + sparkles ---------------- */
   const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
-  let W, H, DPR = Math.min(window.devicePixelRatio||1, innerWidth<600?1.5:2);
+  let W, H, DPR = Math.min(window.devicePixelRatio||1, innerWidth<600?1.25:2);
   const fcv = document.getElementById('front'), fctx = fcv.getContext('2d');
   function size(){ W = innerWidth; H = innerHeight; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); fcv.width=W*DPR; fcv.height=H*DPR; fctx.setTransform(DPR,0,0,DPR,0,0); }
   size(); addEventListener('resize', size);
@@ -801,7 +813,7 @@ form.rsvp{margin-top:28px;text-align:left;display:grid;gap:18px}
   /* ---------------- Fireflies ---------------- */
   (function(){
     const c=document.getElementById('flies'), x=c.getContext('2d');
-    let w,h,dpr=Math.min(devicePixelRatio||1, innerWidth<600?1.5:2);
+    let w,h,dpr=Math.min(devicePixelRatio||1, innerWidth<600?1.25:2);
     function rs(){ w=innerWidth; h=innerHeight; c.width=w*dpr; c.height=h*dpr; x.setTransform(dpr,0,0,dpr,0,0); }
     rs(); addEventListener('resize',rs);
     const N = innerWidth<600 ? 32 : 50;
@@ -1064,6 +1076,11 @@ form.rsvp{margin-top:28px;text-align:left;display:grid;gap:18px}
     document.addEventListener('visibilitychange',()=>{ if(document.hidden){ if(on){ a.pause(); } } else if(on){ a.play().catch(()=>{}); } });
     a.addEventListener('error',()=>{ btn.classList.remove('show'); });
   })();
+
+
+  /* ---------------- Block page pinch / double-tap zoom (photo viewer has its own zoom) ---------------- */
+  ['gesturestart','gesturechange'].forEach(ev=>document.addEventListener(ev,e=>{ if(!(e.target.closest&&e.target.closest('.lightbox'))) e.preventDefault(); },{passive:false}));
+  document.addEventListener('touchmove',e=>{ if(e.touches.length>1 && !(e.target.closest&&e.target.closest('.lightbox'))) e.preventDefault(); },{passive:false});
 
   /* ---------------- Photo gallery ---------------- */
   (function(){
