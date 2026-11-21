@@ -291,10 +291,14 @@ body.lb-open #sky,body.lb-open #flies,body.lb-open #front,body.lb-open main,body
 .deet .val.tba{font-style:italic;font-weight:500;color:#8c76ad;font-size:21px}
 .fit1{white-space:nowrap;display:block;max-width:100%}
 .deet .val.big{font-family:var(--script);font-weight:400;font-size:44px;line-height:1.1;color:var(--violet)}
-.swatches{display:flex;justify-content:center;gap:12px;margin-top:10px}
+.swatches{display:flex;justify-content:center;gap:14px;margin-top:16px;flex-wrap:nowrap}
+.swi{display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--caps);font-size:11px;letter-spacing:.12em;color:#4a2a78;text-transform:uppercase}
+#swatches .sw{width:62px;height:62px;border-width:4px}
+@media (max-width:380px){#swatches .sw{width:50px;height:50px}.swatches{gap:8px}.swi{font-size:10px;letter-spacing:.06em}}
+.dc-note{margin:16px auto 0;max-width:320px;padding:10px 16px;border-radius:14px;background:rgba(169,214,245,.25);border:1px dashed rgba(63,134,191,.55);font-style:italic;font-size:18px;color:#3a1f63;line-height:1.35}
 .sw{width:42px;height:42px;border-radius:50%;cursor:pointer;border:3px solid #fff;box-shadow:0 6px 14px rgba(60,20,100,.35),inset 0 -6px 10px rgba(0,0,0,.25);transition:transform .3s;background-image:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0,rgba(255,255,255,.35) 22%,transparent 46%),radial-gradient(circle at 70% 80%,rgba(0,0,0,.18),transparent 55%)!important}
 .sw:hover,.sw.act{transform:translateY(-4px) scale(1.08)}
-.swname{font-style:italic;color:#6a4b93;margin-top:8px;min-height:1.5em;font-size:18px}
+.swname{font-style:italic;color:#6a4b93;margin-top:8px;min-height:1.5em;font-size:17px}
 .btns{display:flex;justify-content:center;gap:26px;margin-top:30px}
 .medal{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:#5b2d97;font-family:var(--caps);font-size:11px;letter-spacing:.2em;cursor:pointer;background:none;border:0}
 .medal .m{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;
@@ -599,14 +603,15 @@ form.rsvp{margin-top:28px;text-align:left;display:grid;gap:18px}
         <div class="deet"><div class="lbl">TIME</div><div class="val">5:00 in the afternoon</div></div>
         <div class="deet"><div class="lbl">VENUE</div><div class="val">8th Cafe and Events</div><div style="font-style:italic;color:#6a4b93;font-size:18px;margin-top:2px">Teodoro Palma Gil St, Obrero, Davao City</div></div>
         <div class="deet"><div class="lbl">DRESS CODE</div>
-          <div class="val" style="font-size:21px">Enchanted dress in pink, light blue, green and white</div>
+          <div class="val" style="font-size:23px">Enchanted dress in pink, light blue, green and white</div>
           <div class="swatches" id="swatches">
-            <button class="sw" style="background:#f3a3c9" data-n="Pink, for a rosy garden glow" aria-label="Pink"></button>
-            <button class="sw" style="background:#a9d6f5" data-n="Light blue, soft as a twilight sky" aria-label="Light blue"></button>
-            <button class="sw" style="background:#7cbf8a" data-n="A touch of green, like garden vines" aria-label="Green"></button>
-            <button class="sw" style="background:#ffffff" data-n="A touch of white, soft as moonlight" aria-label="White"></button>
+            <div class="swi"><button class="sw" style="background:#f3a3c9" data-n="Pink, for a rosy garden glow" aria-label="Pink"></button><span>Pink</span></div>
+            <div class="swi"><button class="sw" style="background:#a9d6f5" data-n="Light blue, soft as a twilight sky" aria-label="Light blue"></button><span>Light blue</span></div>
+            <div class="swi"><button class="sw" style="background:#7cbf8a" data-n="A touch of green, like garden vines" aria-label="Green"></button><span>Green</span></div>
+            <div class="swi"><button class="sw" style="background:#ffffff" data-n="A touch of white, soft as moonlight" aria-label="White"></button><span>White</span></div>
           </div>
-          <div class="swname" id="swname">Tap a color</div>
+          <div class="dc-note">Kindly choose your outfit from these colors only.</div>
+          <div class="swname" id="swname"></div>
         </div>
       </div>
       <div class="btns">
