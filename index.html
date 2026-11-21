@@ -156,6 +156,24 @@ button,a,[role=button],.gcard{touch-action:manipulation}
   .date-chip{background:rgba(70,30,130,.75)}
 }
 
+/* ---------- Closing lantern ---------- */
+.hero-lantern{position:relative;width:min(70vw,280px);margin:0 auto;aspect-ratio:220/300}
+.hl-glow{position:absolute;left:50%;top:46%;width:160%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,214,150,.45),rgba(196,150,250,.32) 40%,rgba(169,214,245,.12) 62%,transparent);animation:hlPulse 3.2s ease-in-out infinite alternate;pointer-events:none}
+@keyframes hlPulse{from{opacity:.75;transform:translate(-50%,-50%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
+.hl-float{position:absolute;inset:0;animation:hlBob 4.5s ease-in-out infinite alternate}
+@keyframes hlBob{from{transform:translateY(6px) rotate(-1.5deg)}to{transform:translateY(-8px) rotate(1.5deg)}}
+.hl-rise{width:100%;filter:drop-shadow(0 0 24px rgba(255,200,140,.55)) drop-shadow(0 0 50px rgba(166,96,240,.45))}
+.hl-rise svg{width:100%;height:auto;display:block;overflow:visible}
+.hl-rise.up{transition:transform 4.2s cubic-bezier(.45,0,.75,.6),opacity 1.2s ease 3s;transform:translateY(-120vh) scale(.55) rotate(4deg);opacity:0}
+.hl-rise.back{opacity:0;transform:translateY(30px) scale(.9)}
+.hl-rise.in{transition:transform 1.4s cubic-bezier(.2,.8,.2,1),opacity 1.4s ease;opacity:1;transform:none}
+.hl-flame{animation:hlFlick 1.2s ease-in-out infinite alternate}
+@keyframes hlFlick{from{opacity:.75}to{opacity:1}}
+.hl-msg{position:absolute;left:-20px;right:-20px;bottom:-6px;text-align:center;white-space:nowrap;font-family:var(--script);font-size:clamp(26px,8vw,34px);color:#ffeef6;opacity:0;transition:opacity .8s;
+  text-shadow:0 0 14px rgba(243,163,201,.7),0 2px 8px rgba(15,4,35,.9);pointer-events:none}
+.hl-msg.show{opacity:1}
+
 /* ---------- Hero ---------- */
 .kicker{text-shadow:0 1px 10px rgba(20,6,45,.9),0 0 2px rgba(20,6,45,.8);font-family:var(--caps);letter-spacing:.38em;font-size:12.5px;color:var(--sky)}
 .name{font-family:var(--script);font-weight:400;font-size:clamp(96px,26vw,190px);line-height:1.25;margin:4px 0 -8px;padding-bottom:.28em!important;
@@ -653,7 +671,37 @@ form.rsvp{margin-top:28px;text-align:left;display:grid;gap:18px}
 <!-- ============ CLOSING ============ -->
 <section id="closing">
   <div class="wrap glass">
-    <div class="portrait rv"><img src="felicity.jpg" alt="Felicity in her lavender debut gown"></div>
+    <div class="hero-lantern rv" id="heroLantern" aria-label="A glowing purple paper lantern, ready to be released">
+      <div class="hl-glow"></div>
+      <div class="hl-float"><div class="hl-rise" id="hlRise">
+        <svg viewBox="0 0 220 260" aria-hidden="true">
+          <defs>
+            <radialGradient id="hlBody" cx=".46" cy=".55" r=".62">
+              <stop offset="0" stop-color="#fff4dc"/><stop offset=".22" stop-color="#ffd9a8"/>
+              <stop offset=".5" stop-color="#d7b4ff"/><stop offset=".8" stop-color="#9a62e6"/><stop offset="1" stop-color="#5e2ca8"/>
+            </radialGradient>
+            <radialGradient id="hlCore" cx=".5" cy=".62" r=".5"><stop offset="0" stop-color="#fff8e6" stop-opacity=".95"/><stop offset="1" stop-color="#ffd9a8" stop-opacity="0"/></radialGradient>
+            <linearGradient id="hlRim" x1="0" x2="1"><stop offset="0" stop-color="#cdb3f2"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#b685f5"/></linearGradient>
+            <clipPath id="hlClip"><ellipse cx="110" cy="138" rx="96" ry="88"/></clipPath>
+          </defs>
+          <ellipse cx="110" cy="138" rx="96" ry="88" fill="url(#hlBody)"/>
+          <ellipse cx="110" cy="150" rx="62" ry="52" fill="url(#hlCore)"/>
+          <g clip-path="url(#hlClip)" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="1.6">
+            <path d="M14 70 Q110 82 206 70"/><path d="M14 92 Q110 104 206 92"/><path d="M14 115 Q110 127 206 115"/>
+            <path d="M14 138 Q110 150 206 138"/><path d="M14 161 Q110 173 206 161"/><path d="M14 184 Q110 196 206 184"/><path d="M14 206 Q110 218 206 206"/>
+          </g>
+          <g clip-path="url(#hlClip)" fill="none" stroke="rgba(70,20,120,.18)" stroke-width="1.2">
+            <ellipse cx="110" cy="138" rx="44" ry="88"/><ellipse cx="110" cy="138" rx="74" ry="88"/>
+          </g>
+          <path d="M40 92 C52 66 76 54 98 52" stroke="rgba(255,255,255,.55)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="110" cy="52" rx="24" ry="6" fill="url(#hlRim)"/>
+          <rect x="96" y="40" width="28" height="12" rx="3" fill="#5e2ca8"/>
+          <ellipse cx="110" cy="224" rx="28" ry="7" fill="#ffe7c2"/>
+          <ellipse class="hl-flame" cx="110" cy="221" rx="10" ry="4" fill="#fff6dc"/>
+        </svg>
+      </div></div>
+      <div class="hl-msg" id="hlMsg">Make a wish for Felicity</div>
+    </div>
     <div class="closing rv d1">See you under the lanterns</div>
     <div class="foot rv d2">With love, Felicity</div>
     <button class="lantern-btn rv d3" id="releaseBtn">RELEASE A LANTERN</button>
@@ -1207,12 +1255,21 @@ form.rsvp{margin-top:28px;text-align:left;display:grid;gap:18px}
 
   /* ---------------- Release a lantern ---------------- */
   const BIG_PURPLE = {edge:[122,58,196], mid:[196,150,250]};
+  let hlBusy=false;
   document.getElementById('releaseBtn').addEventListener('click', e=>{
-    const r = e.currentTarget.getBoundingClientRect();
-    lanterns.push(makeLantern({x:r.left+r.width/2, y:r.top-30, depth:1, size:Math.min(110, innerWidth*.24), color:BIG_PURPLE, vy:-2.4, front:true}));
-    spawnSparks(r.left+r.width/2, r.top-20, 34, ['#fff','#e9dcff','#cdb3f2','#b685f5','#a9d6f5','#f3a3c9']);
-  });
-})();
+    const rise=document.getElementById('hlRise'), msg=document.getElementById('hlMsg');
+    const r = rise.getBoundingClientRect();
+    spawnSparks(r.left+r.width/2, r.top+r.height*.55, 40, ['#fff','#ffe2a8','#e9dcff','#cdb3f2','#b685f5','#a9d6f5','#f3a3c9']);
+    if(hlBusy){ // already flying: send an extra lantern up from the button
+      const b=e.currentTarget.getBoundingClientRect();
+      lanterns.push(makeLantern({x:b.left+b.width/2, y:b.top-30, depth:1, size:Math.min(90, innerWidth*.2), color:BIG_PURPLE, vy:-2.4, front:true}));
+      return;
+    }
+    hlBusy=true; rise.classList.remove('in','back'); void rise.offsetWidth; rise.classList.add('up');
+    msg.classList.add('show');
+    setTimeout(()=>{ rise.classList.remove('up'); rise.classList.add('back'); void rise.offsetWidth; rise.classList.add('in'); }, 4600);
+    setTimeout(()=>{ msg.classList.remove('show'); hlBusy=false; }, 6200);
+  });})();
 </script>
 </body>
 </html>
